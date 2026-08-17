@@ -215,12 +215,13 @@ h3 { font-size: clamp(20px, 2.4vw, 26px); }
 .hero {
   position: relative;
   min-height: 94vh;
+  min-height: 94svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
   isolation: isolate;
 }
-.hero--page { min-height: 58vh; align-items: center; }
+.hero--page { min-height: 58vh; min-height: 58svh; align-items: center; }
 .kb-media {
   position: absolute; inset: -8% -8%;
   z-index: -2;
@@ -569,3 +570,61 @@ h3 { font-size: clamp(20px, 2.4vw, 26px); }
 .flex-between { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 .max-w { max-width: 720px; }
 .center { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* ==========================================================================
+   Mobile refinements — resserré, tactile, sans coupures ni zones mortes
+   ========================================================================== */
+@media (max-width: 760px) {
+  .container { padding: 0 18px; }
+
+  /* rythme vertical plus dense sur mobile */
+  .section { padding: 56px 0; }
+  .section--tight { padding: 36px 0; }
+  .cta-band { padding: 44px 0; }
+
+  /* hero : moins de vide au-dessus/au-dessous du texte, CTA pleine largeur et empilés */
+  .hero__content { padding: 40px 0 56px; }
+  .hero--page .hero__content { padding: 34px 0; }
+  .hero .cta-row, .cta-band .cta-row { flex-direction: column; align-items: stretch; }
+  .hero .cta-row .btn, .cta-band .cta-row .btn { width: 100%; }
+  .hero__services { gap: 8px; }
+  .hero__services span { font-size: 12px; padding: 6px 11px; }
+  .scroll-cue { display: none; }
+
+  .cta-band__inner { flex-direction: column; align-items: flex-start; gap: 22px; }
+  .cta-band__phone { font-size: 28px; }
+
+  /* ticker : items plus compacts pour ne pas donner l'impression de vide entre les mots */
+  .ticker { padding: 14px 0; }
+  .ticker__item { padding: 0 16px; font-size: 15px; gap: 12px; }
+  .ticker__logo { width: 24px; height: 24px; font-size: 12px; }
+
+  /* service-story : image un peu moins haute, tags resserrés */
+  .service-story { padding: 32px 0; gap: 20px; }
+  .service-story__media { aspect-ratio: 4/3; }
+  .service-story__body .hero__services { margin: 10px 0 16px; }
+
+  /* showreel : bords de fondu réduits, sinon ils mangent la moitié de l'écran */
+  .showreel::before, .showreel::after { width: 36px; }
+  .showreel__item { width: 78vw; }
+  .showreel + .showreel { margin-top: 12px; }
+
+  .form-card { padding: 22px; }
+  .why-item { gap: 12px; }
+  .why-item__num { font-size: 32px; }
+
+  .footer { padding: 44px 0 22px; }
+  .footer__bottom { flex-direction: column; gap: 6px; }
+}
+
+@media (max-width: 400px) {
+  .brand__text strong { font-size: 17px; }
+  .btn-lg { padding: 15px 22px; font-size: 14px; }
+  .hero__badge { font-size: 11px; padding: 7px 13px; }
+}
+
+/* certaines pages fixent un grand gap en style inline pour la mise en page desktop
+   (image/texte en 2 colonnes) — on le resserre une fois les colonnes empilées */
+@media (max-width: 620px) {
+  .grid--2[style*="gap"] { gap: 24px !important; }
+}
